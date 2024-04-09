@@ -18,4 +18,8 @@ You should use the following command on the [root folder](./docker-compose.yml):
 
 `docker-compose up -d`
 
+## Requirements to consider
+- Do not modify any files except those deemed necessary.
+- If the application is dockerized, do it in another Docker file inside an 'integration' folder.
+
 ## The game begins! 🎮
