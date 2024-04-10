@@ -5,7 +5,7 @@ For this reason, the following [operation in the REST API](./src/main/resources/
 
 We also have a database that contains the information of each of the video games, which follows the following [schema](./src/main/resources/schema.sql).
 
-Finally, to process data and stay updated due to possible sales, we have provided a real-time messaging system in which there is [a queue](./src/main/resources/application.properties) where stock changes are notified as of today. For this, [here](./src/main/resources/schema.sql) is the current day and the name of the queue.
+Finally, to process data and stay updated due to possible sales, we have provided a real-time messaging system in which there is [a queue](./src/main/resources/application.properties) where stock changes are notified as of today. For this, [here](./src/main/resources/application.properties) is the current day and the name of the queue.
 
 **Ultimately, a Spring Boot application is required that contains the following points:**
 
