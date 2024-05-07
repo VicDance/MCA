@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>io.swagger.core.v3</groupId>
 			<artifactId>swagger-annotations</artifactId>
-			<version>2.2.4</version>
+			<version>2.2.15</version>
 		</dependency>
 
 		<dependency>
@@ -122,10 +122,10 @@
 	</dependencies>
 	<build>
 		<plugins>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -143,45 +143,34 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
+							<generatorName>spring</generatorName>
 							<inputSpec>${project.basedir}/src/main/resources/videoGames.yaml</inputSpec>
-							<output>${project.basedir}/target/generated-sources/videoGames</output>
-							<modelPackage>com.mca.infrastructure.model.videoGame</modelPackage>
+							<output>${project.basedir}/target/generated-sources</output>
 							<apiPackage>com.mca.controller</apiPackage>
-							<generatorName>java</generatorName>
+							<modelPackage>com.mca.infrastructure.model.videoGame</modelPackage>
 							<generateApis>true</generateApis>
 							<generateModels>true</generateModels>
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
 							<configOptions>
-								<controllerThrowsExceptions>java.io.IOException,com.example.NotFoundException</controllerThrowsExceptions>
-								<interfaceOnly>true</interfaceOnly>
-								<skipDefaultInterface>true</skipDefaultInterface>
-								<useBeanValidation>true</useBeanValidation>
-								<useClassLevelBeanValidation>false</useClassLevelBeanValidation>
-								<useTags>true</useTags>
 								<java17>true</java17>
-								<useOptional>false</useOptional>
-								<hideGenerationTimestamp>true</hideGenerationTimestamp>
 								<dateLibrary>java17</dateLibrary>
-								<bigDecimalAsString>true</bigDecimalAsString>
+								<openApiNullable>false</openApiNullable>
+								<interfaceOnly>false</interfaceOnly>
+								<delegatePattern>true</delegatePattern>
+								<useOptional>true</useOptional>
 								<useBeanValidation>true</useBeanValidation>
 							</configOptions>
-							<typeMappings>
-								<typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
-							</typeMappings>
-							<importMappings>
-								<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
-							</importMappings>
 						</configuration>
 					</execution>
-					<execution>
+					<!--<execution>
 						<id>game-saga-generate</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
 							<inputSpec>${project.basedir}/src/main/resources/gameSagaAPI.yaml</inputSpec>
-							<output>${project.basedir}/target/generated-sources/gameSaga</output>
+							<output>${project.basedir}/target/generated-sources</output>
 							<modelPackage>com.mca.infrastructure.model.gameSaga</modelPackage>
 							<apiPackage>com.mca.controller.gameSaga</apiPackage>
 							<generatorName>java</generatorName>
@@ -190,14 +179,13 @@
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
 							<configOptions>
+								<openApiNullable>false</openApiNullable>
+								<delegatePattern>true</delegatePattern>
 								<controllerThrowsExceptions>java.io.IOException,com.example.NotFoundException</controllerThrowsExceptions>
-								<interfaceOnly>true</interfaceOnly>
-								<skipDefaultInterface>true</skipDefaultInterface>
-								<useBeanValidation>true</useBeanValidation>
 								<useClassLevelBeanValidation>false</useClassLevelBeanValidation>
 								<useTags>true</useTags>
 								<java17>true</java17>
-								<useOptional>false</useOptional>
+								<useOptional>true</useOptional>
 								<hideGenerationTimestamp>true</hideGenerationTimestamp>
 								<dateLibrary>java17</dateLibrary>
 								<bigDecimalAsString>true</bigDecimalAsString>
@@ -210,7 +198,7 @@
 								<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
 							</importMappings>
 						</configuration>
-					</execution>
+					</execution>-->
 				</executions>
 			</plugin>
 		</plugins>
