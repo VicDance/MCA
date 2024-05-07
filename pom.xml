@@ -70,6 +70,55 @@
 			<artifactId>gson</artifactId>
 		</dependency>
 		<!--- Dependencys for solution -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.swagger.parser.v3</groupId>
+			<artifactId>swagger-parser</artifactId>
+			<version>2.1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-deploy-plugin</artifactId>
+			<version>3.0.0</version>
+			<type>maven-plugin</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okio</groupId>
+			<artifactId>okio</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>3.14.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.gsonfire</groupId>
+			<artifactId>gson-fire</artifactId>
+			<version>1.7.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -80,6 +129,66 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<!-- RELEASE_VERSION -->
+				<version>6.6.0</version>
+				<!-- /RELEASE_VERSION -->
+				<executions>
+					<execution>
+						<id>video-games-generate</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/videoGames.yaml</inputSpec>
+							<output>${project.basedir}/target/generated-sources/videoGames</output>
+							<modelPackage>com.mca.infrastructure.model</modelPackage>
+							<apiPackage>com.mca.controller</apiPackage>
+							<generatorName>java</generatorName>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<controllerThrowsExceptions>java.io.IOException,com.example.NotFoundException</controllerThrowsExceptions>
+								<interfaceOnly>true</interfaceOnly>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<useBeanValidation>true</useBeanValidation>
+								<useClassLevelBeanValidation>false</useClassLevelBeanValidation>
+								<useTags>true</useTags>
+								<java17>true</java17>
+								<useOptional>false</useOptional>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<dateLibrary>java17</dateLibrary>
+								<bigDecimalAsString>true</bigDecimalAsString>
+								<useBeanValidation>true</useBeanValidation>
+							</configOptions>
+							<typeMappings>
+								<typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+							</typeMappings>
+							<importMappings>
+								<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+							</importMappings>
+						</configuration>
+					</execution>
+					<execution>
+						<id>game-saga-generate</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/gameSagaAPI.yaml</inputSpec>
+							<output>${project.basedir}/target/generated-sources/gameSaga</output>
+							<generatorName>java</generatorName>
+							<configOptions>
+								<sourceFolder>src/gen/java/main</sourceFolder>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
