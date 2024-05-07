@@ -145,7 +145,7 @@
 						<configuration>
 							<inputSpec>${project.basedir}/src/main/resources/videoGames.yaml</inputSpec>
 							<output>${project.basedir}/target/generated-sources/videoGames</output>
-							<modelPackage>com.mca.infrastructure.model</modelPackage>
+							<modelPackage>com.mca.infrastructure.model.videoGame</modelPackage>
 							<apiPackage>com.mca.controller</apiPackage>
 							<generatorName>java</generatorName>
 							<generateApis>true</generateApis>
@@ -182,10 +182,33 @@
 						<configuration>
 							<inputSpec>${project.basedir}/src/main/resources/gameSagaAPI.yaml</inputSpec>
 							<output>${project.basedir}/target/generated-sources/gameSaga</output>
+							<modelPackage>com.mca.infrastructure.model.gameSaga</modelPackage>
+							<apiPackage>com.mca.controller.gameSaga</apiPackage>
 							<generatorName>java</generatorName>
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
 							<configOptions>
-								<sourceFolder>src/gen/java/main</sourceFolder>
+								<controllerThrowsExceptions>java.io.IOException,com.example.NotFoundException</controllerThrowsExceptions>
+								<interfaceOnly>true</interfaceOnly>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<useBeanValidation>true</useBeanValidation>
+								<useClassLevelBeanValidation>false</useClassLevelBeanValidation>
+								<useTags>true</useTags>
+								<java17>true</java17>
+								<useOptional>false</useOptional>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<dateLibrary>java17</dateLibrary>
+								<bigDecimalAsString>true</bigDecimalAsString>
+								<useBeanValidation>true</useBeanValidation>
 							</configOptions>
+							<typeMappings>
+								<typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+							</typeMappings>
+							<importMappings>
+								<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+							</importMappings>
 						</configuration>
 					</execution>
 				</executions>
