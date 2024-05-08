@@ -1,12 +1,15 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: VideoGamesAPI
   version: '1.0'
 servers:
   - url: 'http://localhost:8080'
 paths:
-  '/game/{gameId}/saga':
+  /game/{gameId}/saga:
     get:
+      tags:
+        - Game
+      operationId: get-game-saga
       parameters:
         - name: gameId
           in: path
@@ -17,7 +20,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            'application/json':
               schema:
                 $ref: '#/components/schemas/Sagas'
 components:

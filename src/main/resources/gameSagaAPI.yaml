@@ -5,7 +5,7 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  '/game-saga/{gameId}/related-sagas':
+  /game-saga/{gameId}/related-sagas:
     parameters:
       - schema:
           type: string
@@ -13,6 +13,8 @@ paths:
         in: path
         required: true
     get:
+      tags:
+        - Game
       operationId: get-game-saga-related-sagas
       summary: Gets the related game sagas
       description: Returns the related game sagas to a given one ordered by relevance
@@ -20,7 +22,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            'application/json':
               schema:
                 $ref: '#/components/schemas/RelatedGameSagas'
 components:
