@@ -38,13 +38,8 @@ class GameControllerTest {
 	}
 
 	@Test
-	void should_return400_when_invalidId() {
-
-	}
-
-	@Test
-	void should_return404_when_noGameFound() {
-
+	void should_return404_when_noGameFound() throws Exception {
+		mockMvc.perform(get(URL, 102)).andExpect(status().isNotFound());
 	}
 
 	@Test
