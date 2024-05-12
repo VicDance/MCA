@@ -47,9 +47,9 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<scope>test</scope>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -119,13 +119,19 @@
 			<artifactId>gson-fire</artifactId>
 			<version>1.7.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
-			<!--<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -161,34 +167,36 @@
 								<useOptional>true</useOptional>
 								<useBeanValidation>true</useBeanValidation>
 							</configOptions>
+							<typeMappings>
+								<typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+							</typeMappings>
+							<importMappings>
+								<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+							</importMappings>
 						</configuration>
 					</execution>
-					<!--<execution>
+					<execution>
 						<id>game-saga-generate</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
+							<generatorName>spring</generatorName>
 							<inputSpec>${project.basedir}/src/main/resources/gameSagaAPI.yaml</inputSpec>
 							<output>${project.basedir}/target/generated-sources</output>
 							<modelPackage>com.mca.infrastructure.model.gameSaga</modelPackage>
-							<apiPackage>com.mca.controller.gameSaga</apiPackage>
-							<generatorName>java</generatorName>
+							<apiPackage>com.mca.controller</apiPackage>
 							<generateApis>true</generateApis>
 							<generateModels>true</generateModels>
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
 							<configOptions>
-								<openApiNullable>false</openApiNullable>
-								<delegatePattern>true</delegatePattern>
-								<controllerThrowsExceptions>java.io.IOException,com.example.NotFoundException</controllerThrowsExceptions>
-								<useClassLevelBeanValidation>false</useClassLevelBeanValidation>
-								<useTags>true</useTags>
 								<java17>true</java17>
-								<useOptional>true</useOptional>
-								<hideGenerationTimestamp>true</hideGenerationTimestamp>
 								<dateLibrary>java17</dateLibrary>
-								<bigDecimalAsString>true</bigDecimalAsString>
+								<openApiNullable>false</openApiNullable>
+								<interfaceOnly>false</interfaceOnly>
+								<delegatePattern>true</delegatePattern>
+								<useOptional>true</useOptional>
 								<useBeanValidation>true</useBeanValidation>
 							</configOptions>
 							<typeMappings>
@@ -198,7 +206,7 @@
 								<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
 							</importMappings>
 						</configuration>
-					</execution>-->
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
