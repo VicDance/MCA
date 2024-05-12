@@ -12,10 +12,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
-public class SagaController implements GameSagaApiDelegate{
+public class GameController implements GameApiDelegate{
+
+    @Autowired
+    private GameRepository repository;
+
+    private GameMapper mapper = new GameMapper();
 
     @Override
-    public ResponseEntity<Set<String>> getGameSagaRelatedSagas(String gameId) {
-        return GameSagaApiDelegate.super.getGameSagaRelatedSagas(gameId);
+    public ResponseEntity<Set<Game>> getGameSaga(String gameId) {
+        System.out.println("Funciona");
+        Set<Game> gameSet = Stream.of(repository.getReferenceById(gameId)).map(game -> mapper.toDTO(game)).collect(Collectors.toSet());
+        return ResponseEntity.ok(gameSet);
     }
 }
