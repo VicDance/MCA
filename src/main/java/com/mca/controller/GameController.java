@@ -2,8 +2,11 @@ package com.mca.controller;
 
 import com.mca.data.mapper.GameMapper;
 import com.mca.data.repository.GameRepository;
+import com.mca.data.service.GameService;
+import com.mca.infrastructure.model.VideoGameEntity;
 import com.mca.infrastructure.model.videoGame.Game;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,14 +18,18 @@ import java.util.stream.Stream;
 public class GameController implements GameApiDelegate{
 
     @Autowired
-    private GameRepository repository;
+    private GameService service;
 
-    private GameMapper mapper = new GameMapper();
+    private final GameMapper mapper = new GameMapper();
 
     @Override
     public ResponseEntity<Set<Game>> getGameSaga(String gameId) {
-        System.out.println("Funciona");
-        Set<Game> gameSet = Stream.of(repository.getReferenceById(gameId)).map(game -> mapper.toDTO(game)).collect(Collectors.toSet());
-        return ResponseEntity.ok(gameSet);
+        VideoGameEntity entity = VideoGameEntity.builder().build();
+        try {
+            entity = service.getById(gameId).orElseThrow(() -> new Exception(HttpStatus.NOT_FOUND + ": Id not found"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(Set.of(mapper.toDTO(entity)));
     }
 }
