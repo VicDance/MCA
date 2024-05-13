@@ -7,4 +7,8 @@ RUN mvn dependency:go-offline
 COPY ./src ./src
 RUN mvn clean install -Dmaven.test.skip=true
 
-RUN rm -v $PWD:/src/main/resources openapitools/openapi-generator-cli generate -i /resources/videGames.yaml -g go -o /local/out/go
+FROM amazoncorretto:17-alpine3.17
+WORKDIR /opt/app
+COPY --from=build /opt/app/target/mcaBackend-1.0.jar /opt/app
+
+CMD java -jar target/mcaBackend-1.0.jar
