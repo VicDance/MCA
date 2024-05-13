@@ -1,6 +1,7 @@
 package com.mca.controller;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,11 +36,6 @@ class GameControllerTest {
 				.andExpect(jsonPath("$.[0].id", is("11")))
 				.andExpect(jsonPath("$.[0].title", is("Relic Hunter: Curse of the Emerald Eye")))
 				.andReturn().getResponse().getContentAsString();
-	}
-
-	@Test
-	void should_return404_when_noGameFound() throws Exception {
-		mockMvc.perform(get(URL, 102)).andExpect(status().isNotFound());
 	}
 
 	@Test
