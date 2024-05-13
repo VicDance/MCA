@@ -1,6 +1,6 @@
 /shelf/
 /workspace.xml
 /target/
-.idea
+.idea/
 !**/src/main/**/target/
 !**/src/test/**/target/
