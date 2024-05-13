@@ -5,34 +5,40 @@ import com.mca.infrastructure.model.VideoGameEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class GameServiceImplTest {
 
+    @InjectMocks
     private GameServiceImpl service;
 
-    @Autowired
+    @Mock
     private GameRepository repository;
 
     @BeforeEach
     public void setUp() {
-        service = new GameServiceImpl();
-        service.repository = repository;
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
     void should_return200_when_validId() {
         // Given
         String gameId = "1";
+        VideoGameEntity expectedEntity = VideoGameEntity.builder().id(gameId).name("Star Wars").build();
 
         // When
+        when(repository.findById(gameId)).thenReturn(Optional.of(expectedEntity));
         Optional<VideoGameEntity> entity = service.getById(gameId);
 
         // Then
