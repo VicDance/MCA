@@ -7,7 +7,6 @@ import com.mca.infrastructure.model.VideoGameEntity;
 import com.mca.infrastructure.model.videoGame.Game;
 import com.mca.service.GameServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +19,12 @@ public class GameController implements GameApiDelegate{
     @Autowired
     private GameServiceImpl gameService;
 
-    private final GameMapper mapper = new GameMapper();
+    @Autowired
+    private GameMapper mapper;
 
     @Override
     public ResponseEntity<Set<Game>> getGameSaga(String gameId) {
         Optional<VideoGameEntity> entity = gameService.getById(gameId);
-        return ResponseEntity.ok(Set.of(mapper.toDTO(entity.get())));
+        return ResponseEntity.ok(Set.of(mapper.transformToDTO(entity.get())));
     }
 }
