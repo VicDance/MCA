@@ -1,14 +1,12 @@
 package com.mca.service;
 
 import com.mca.data.repository.GameRepository;
-import com.mca.data.service.GameService;
 import com.mca.infrastructure.model.VideoGameEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
